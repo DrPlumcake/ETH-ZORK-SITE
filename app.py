@@ -68,4 +68,4 @@ def detail():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Crea le tabelle se non esistono
-    app.run(debug=True)
+    app.run(host="192.168.56.100", debug=True)
