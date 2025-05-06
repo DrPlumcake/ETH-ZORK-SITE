@@ -13,7 +13,7 @@
             text-align: center;
             margin: 50px auto;
         }
-        .profile-photo img {
+        .profile-pic img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
@@ -66,10 +66,15 @@
     <div class="container">
         <div class="profile-section">
             <h2>Account Profile</h2>
-            <div class="profile-photo">
-                <img src="{{ url_for('static', filename='default-profile.png') }}" alt="Profile Photo">
+            <div class="profile-pic">
+                {% if user.profile_pic %}
+                    <p>{{ user.profile_pic }}</p>
+                    <img src="{{ url_for('static', filename=user.profile_pic) }}" alt="Profile Picture">
+                {% else %}
+                    <img src="{{ url_for('static', filename='uploads/default-profile.jpg') }}" alt="Profile Picture">
+                {% endif %}
                 <form action="/upload-photo" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="profile_photo" accept="image/*">
+                    <input type="file" name="profile_pic">
                     <button type="submit">Upload Photo</button>
                 </form>
             </div>
