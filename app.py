@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from werkzeug.utils import secure_filename
 import os
+from os import stat
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'  # Cambiala in produzione!
@@ -61,6 +62,9 @@ def upload_photo():
     # Crea la cartella se non esiste
     upload_folder = os.path.join(app.root_path, 'static', 'uploads')
     os.makedirs(upload_folder, exist_ok=True)
+
+    # Assegna permessi di esecuzione (chmod 755, lettura, scrittura ed esecuzione per il proprietario, lettura ed esecuzione per gli altri)
+    os.chmod(save_path, os.stat.S_IRWXU | os.stat.S_IRGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IXOTH)
 
     # Salva il file
     save_path = os.path.join(upload_folder, filename)
