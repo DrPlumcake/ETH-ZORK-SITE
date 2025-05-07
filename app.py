@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from werkzeug.utils import secure_filename
 import os
-from os import stat
+import stat
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'  # Cambiala in produzione!
