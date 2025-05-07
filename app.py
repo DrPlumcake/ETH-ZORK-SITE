@@ -68,7 +68,7 @@ def upload_photo():
     file.save(save_path)
     
     # Assegna permessi di esecuzione (chmod 755, lettura, scrittura ed esecuzione per il proprietario, lettura ed esecuzione per gli altri)
-    os.chmod(save_path, os.stat.S_IRWXU | os.stat.S_IRGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IXOTH)
+    os.chmod(save_path, stat.S_IRWXU | stat.S_IRGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IXOTH)
 
     # (Opzionale) Aggiorna il campo profile_pic dell’utente in sessione e DB
     user_session = session['user']
