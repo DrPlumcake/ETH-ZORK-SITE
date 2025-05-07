@@ -63,12 +63,12 @@ def upload_photo():
     upload_folder = os.path.join(app.root_path, 'static', 'uploads')
     os.makedirs(upload_folder, exist_ok=True)
 
-    # Assegna permessi di esecuzione (chmod 755, lettura, scrittura ed esecuzione per il proprietario, lettura ed esecuzione per gli altri)
-    os.chmod(save_path, os.stat.S_IRWXU | os.stat.S_IRGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IXOTH)
-
     # Salva il file
     save_path = os.path.join(upload_folder, filename)
     file.save(save_path)
+    
+    # Assegna permessi di esecuzione (chmod 755, lettura, scrittura ed esecuzione per il proprietario, lettura ed esecuzione per gli altri)
+    os.chmod(save_path, os.stat.S_IRWXU | os.stat.S_IRGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IXOTH)
 
     # (Opzionale) Aggiorna il campo profile_pic dell’utente in sessione e DB
     user_session = session['user']
