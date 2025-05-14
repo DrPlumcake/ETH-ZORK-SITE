@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, render_template_string
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from werkzeug.utils import secure_filename
 import os
 import stat
+from jinja2 import Template
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'  # Cambiala in produzione!
@@ -40,7 +41,6 @@ def login():
             session['user'] = {
                 'id': existing_user.id,
                 'username': existing_user.username,
-                'email': existing_user.email  # Assumendo che ci sia un campo email
             }
             return redirect('/profile')
         else:
@@ -87,8 +87,17 @@ def upload_photo():
 def profile():
     if 'user' not in session:
         return redirect('/login')
+    
     user = User.query.get(session['user']['id'])
-    return render_template('profile.html', user=user)
+    
+    rendered_username = render_template_string(user.username)
+
+    return render_template('profile.html', user={
+        'id': user.id,
+        'username': rendered_username,
+        'email': 'placeholder@example.com',
+        'profile_pic': user.profile_pic
+    })
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -109,7 +118,24 @@ def logout():
     session.pop('user', None)
     return redirect('/')
 
+@app.route('/update-profile', methods=['GET', 'POST'])
+def update_profile():
+    if 'user' not in session:
+        return redirect('/login')
+
+    if request.method == 'POST':
+        user = User.query.get(session['user']['id'])
+        user.username = request.form['username']
+        user.password = request.form['password']  # Idealmente hashata
+        template = Template(user.username)
+        rendered = template.render()
+
+        db.session.commit()
+        session['user']['username'] = rendered
+        return redirect('/profile')
+    return render_template('profile.html')
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Crea le tabelle se non esistono
-    app.run(host="192.168.56.100", debug=True)
+    app.run(debug=True)
