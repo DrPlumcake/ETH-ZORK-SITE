@@ -14,18 +14,23 @@
     <header>
         <!--NavBar Section-->
         <div class="navbar">
-            <nav class="navigation hide" id="navigation">
-                <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="/">Forums</a></li>
-                    <li class="nav-item"><a href="/profile">Profile</a></li>
-                    <li class="nav-item"><a href="/detail">Detail</a></li>
-                    <li class="nav-item"><a href="/login">Login</a></li>
-                </ul>
-            </nav>
-            <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
-            <div class="brand">My Forum</div>
-        </div>
+    <nav class="navigation" id="navigation">
+        <span class="close-icon" id="close-icon" onclick="showIconBar()" style="display: none;">
+            <i class="fa fa-close"></i>
+        </span>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="/">Forums</a></li>
+            <li class="nav-item"><a href="/profile">Profile</a></li>
+            <li class="nav-item"><a href="/detail">Detail</a></li>
+            <li class="nav-item"><a href="/login">Login</a></li>
+        </ul>
+    </nav>
+    <a class="bar-icon" id="iconBar" onclick="hideIconBar()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="brand">My Forum</div>
+</div>
+
         <!--SearchBox Section-->
         <div class="search-box">
             <div>

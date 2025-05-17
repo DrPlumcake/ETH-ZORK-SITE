@@ -49,34 +49,49 @@
 <body>
     <header>
         <div class="navbar">
-            <nav class="navigation hide" id="navigation">
-                <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="/">Forums</a></li>
-                    <li class="nav-item"><a href="/post">Posts</a></li>
-                    <li class="nav-item"><a href="/profile">Profile</a></li>
-                    <li class="nav-item"><a href="/logout">Logout</a></li>
-                </ul>
-            </nav>
-            <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
-            <div class="brand">My Forum</div>
-        </div>
+    <nav class="navigation" id="navigation">
+        <span class="close-icon" id="close-icon" onclick="showIconBar()" style="display: none;">
+            <i class="fa fa-close"></i>
+        </span>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="/">Forums</a></li>
+            <li class="nav-item"><a href="/profile">Profile</a></li>
+            <li class="nav-item"><a href="/detail">Detail</a></li>
+            <li class="nav-item"><a href="/login">Login</a></li>
+        </ul>
+    </nav>
+    <a class="bar-icon" id="iconBar" onclick="hideIconBar()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="brand">My Forum</div>
+</div>
+
     </header>
 
     <div class="container">
         <div class="profile-section">
-            <h2>Account Profile</h2>
+            <h2>Your Account</h2>
             <div class="profile-pic">
                 {% if user.profile_pic %}
-                    <p>{{ user.profile_pic }}</p>
-                    <img src="{{ url_for('static', filename=user.profile_pic) }}" alt="Profile Picture">
-                {% else %}
-                    <img src="{{ url_for('static', filename='uploads/default-profile.jpg') }}" alt="Profile Picture">
-                {% endif %}
-                <form action="/upload-photo" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="profile_pic">
-                    <button type="submit">Upload Photo</button>
-                </form>
+    <div class="profile-img-wrapper">
+        <img src="{{ url_for('static', filename=user.profile_pic) }}" alt="Profile Picture">
+        <div class="edit-overlay">
+            <form action="/upload-photo" method="POST" enctype="multipart/form-data">
+                <label class="edit-btn">
+                    Modify
+                    <input type="file" name="profile_pic" onchange="this.form.submit()">
+                </label>
+            </form>
+        </div>
+    </div>
+{% else %}
+    <img src="{{ url_for('static', filename='uploads/default-profile.jpg') }}" alt="Profile Picture">
+    <form action="/upload-photo" method="POST" enctype="multipart/form-data">
+        <input type="file" name="profile_pic">
+        <button type="submit">Upload Photo</button>
+    </form>
+{% endif %}
+
             </div>
             <div class="profile-details">
                 <h3>Welcome, {{ user['username'] }}!</h3>

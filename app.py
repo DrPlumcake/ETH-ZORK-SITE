@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, session, render_template_string
+from flask import Flask, render_template, request, redirect, session, render_template_string, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from werkzeug.utils import secure_filename
 import os
 import stat
 from jinja2 import Template
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'  # Cambiala in produzione!
@@ -18,9 +20,16 @@ db = SQLAlchemy(app)
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)  # Idealmente hashata
+    username = db.Column(db.String(128), unique=True, nullable=False)
+    password = db.Column(db.String(256), nullable=False)
     profile_pic = db.Column(db.String(200))
+    
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+    
 
 @app.route('/')
 def index():
@@ -46,6 +55,27 @@ def login():
         else:
             return "Login fallito"
     return render_template('login.html')
+
+
+def set_password(self, password):
+    self.password = generate_password_hash(password)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        user = User(username=username)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
+
 
 @app.route('/upload-photo', methods=['POST'])
 def upload_photo():
