@@ -41,19 +41,26 @@ def login():
         user = request.form['username']
         pwd = request.form['password']
 
-        # Query vulnerabile a SQL Injection
-        query = text(f"SELECT * FROM users WHERE username = '{user}' AND password = '{pwd}'")
-        existing_user = db.session.execute(query).fetchone()
+        # Query vulnerabile a SQL Injection (voluta per il progetto)
+        query = text(f"SELECT * FROM users WHERE username = '{user}'")
+        result = db.session.execute(query).fetchone()
 
-        #existing_user = User.query.filter_by(username=user, password=pwd).first()
-        if existing_user:
-            session['user'] = {
-                'id': existing_user.id,
-                'username': existing_user.username,
-            }
-            return redirect('/profile')
+        if result:
+            # result._mapping permette di accedere ai dati come dict
+            user_data = dict(result._mapping)
+            hashed_password = user_data['password']
+
+            if check_password_hash(hashed_password, pwd):
+                session['user'] = {
+                    'id': user_data['id'],
+                    'username': user_data['username'],
+                }
+                return redirect('/profile')
+            else:
+                return "Login fallito: password errata"
         else:
-            return "Login fallito"
+            return "Login fallito: utente non trovato"
+
     return render_template('login.html')
 
 
