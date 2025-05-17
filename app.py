@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.secret_key = 'super_secret_key'  # Cambiala in produzione!
 
 # Configurazione database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://dr_plumcake:drplumcake@localhost/mydb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:aaa@localhost:5432/zorkdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -112,4 +112,4 @@ def logout():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Crea le tabelle se non esistono
-    app.run(host="192.168.56.100", debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=True)
