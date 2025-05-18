@@ -65,14 +65,27 @@ def register():
         username = request.form['username']
         password = request.form['password']
 
-        user = User(username=username)
+        # Controllo se esiste già lo username
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            flash('Username già in uso.')
+            return redirect(url_for('register'))
+        
+        # Controllo se email già esiste
+        if User.query.filter_by(email=email).first():
+            flash('Email già in uso.')
+            return redirect(url_for('register'))
+
+        user = User(username=username, email=email)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
 
+        flash('Registrazione avvenuta con successo!')
         return redirect(url_for('login'))
 
     return render_template('register.html')
+
 
 
 
