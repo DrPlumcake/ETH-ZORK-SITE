@@ -47,13 +47,14 @@ def login():
 
         if user and check_password_hash(user.password, pwd):
             login_user(user)
+            session['user_id'] = user.id
+            flash('Accesso effettuato con successo!')
             return redirect(url_for('profile'))
         else:
             flash('Username o password errati')
             return redirect(url_for('login'))
 
     return render_template('login.html')
-
 
 
 
@@ -71,14 +72,12 @@ def register():
             flash('Username già in uso.')
             return redirect(url_for('register'))
         
-        # Controllo se email già esiste
-        if User.query.filter_by(email=email).first():
-            flash('Email già in uso.')
-            return redirect(url_for('register'))
-
-        user = User(username=username, email=email)
-        user.set_password(password)
-        db.session.add(user)
+        # Creo il nuovo utente
+        new_user = User(username=username)
+        new_user.set_password(password)  # qui viene fatto l'hash e assegnato a new_user.password
+                
+        # Aggiungo alla sessione e committo
+        db.session.add(new_user)
         db.session.commit()
 
         flash('Registrazione avvenuta con successo!')

@@ -33,11 +33,6 @@
         <h2 style="text-align: center; font-family: 'Titillium Web', sans-serif; color: #fff;">Register</h2>
         <form method="POST" action="/register" style="display: flex; flex-direction: column; gap: 20px;">
 
-            
-
-
-
-
             <label for="username" style="color: #fff;">Username:</label>
             <input type="text" id="username" name="username" required style="padding: 10px; font-size: 16px;">
             {% with messages = get_flashed_messages() %}
@@ -50,7 +45,6 @@
 
             <label for="email" style="color: #fff;">Email:</label>
             <input type="email" id="email" name="email" required style="padding: 10px; font-size: 16px;">
-            
 
             <label for="password" style="color: #fff;">Password:</label>
             <input type="password" id="password" name="password" required style="padding: 10px; font-size: 16px;">
