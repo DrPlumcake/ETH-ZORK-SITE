@@ -30,26 +30,33 @@
 
     </header>
 
-    <div class="container" style="max-width: 500px; margin: 50px auto; background: #2c3e50; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px #000;">
+     <div class="container" style="max-width: 500px; margin: 50px auto; background: #2c3e50; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px #000;">
         <h2 style="text-align: center; font-family: 'Titillium Web', sans-serif; color: #fff;">Login</h2>
-        <form method="POST" action="/login" style="display: flex; flex-direction: column; gap: 20px;">
-            <label for="username" style="color: #fff;">Username:</label>
-            <input type="text" id="username" name="username" required style="padding: 10px; font-size: 16px;">
-    
-            <label for="password" style="color: #fff;">Password:</label>
-            <input type="password" id="password" name="password" required style="padding: 10px; font-size: 16px;">
-    
-            <input type="submit" value="Login" style="padding: 10px; font-size: 16px; background-color: #1abc9c; color: white; border: none; cursor: pointer;">
+        <form action="/update-profile" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{ user['username'] }}" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ user['email'] }}" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter new password">
+
+            <button type="submit">Save Changes</button>
+            <p>Password ricevuta: request.form.get('password') </p>
+
         </form>
-        <p style="text-align: center; margin-top: 20px; color: #fff;">
-            Non hai un account? <a href="/register" style="color: #1abc9c;">Registrati</a>
-        </p>
     </div>
 
-    
+
+
+
     <footer style="margin-top: 50px;">
         <span>&copy; Selmi Abderrahim | All Rights Reserved</span>
     </footer>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+
+
 </body>
 </html>
