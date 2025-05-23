@@ -1,12 +1,10 @@
-from flask import flash, Flask, render_template, request, redirect, session, render_template_string, url_for, render_template
+from flask import Flask, render_template, request, redirect, session, render_template_string, render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import current_user, LoginManager, login_required, login_user
 from sqlalchemy import text
 from werkzeug.utils import secure_filename
 import os
 import stat
 from jinja2 import Template
-from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = Flask(__name__)
