@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.secret_key = 'super_secret_key'  # Cambiala in produzione!
 
 # Configurazione database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:aaa@localhost:5432/zorkdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:aaa@localhost:5432/zorkadmin'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
