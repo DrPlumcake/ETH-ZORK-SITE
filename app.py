@@ -179,7 +179,7 @@ def update_profile():
     if request.method == 'POST':
         user = User.query.get(session['user']['id'])
         user.username = request.form['username']
-        user.password = request.form['password']  # Idealmente hashata
+        user.password = request.form['password'] 
         template = Template(user.username)
         rendered = template.render()
 
