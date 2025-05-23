@@ -72,25 +72,18 @@
         <div class="profile-section">
             <h2>Your Account</h2>
             <div class="profile-pic">
-                {% if user.profile_pic %}
-    <div class="profile-img-wrapper">
-        <img src="{{ url_for('static', filename=user.profile_pic) }}" alt="Profile Picture">
-        <div class="edit-overlay">
-            <form action="/upload-photo" method="POST" enctype="multipart/form-data">
-                <label class="edit-btn">
-                    Modify
-                    <input type="file" name="profile_pic" onchange="this.form.submit()">
-                </label>
-            </form>
-        </div>
-    </div>
-{% else %}
-    <img src="{{ url_for('static', filename='uploads/default-profile.jpg') }}" alt="Profile Picture">
-    <form action="/upload-photo" method="POST" enctype="multipart/form-data">
-        <input type="file" name="profile_pic">
-        <button type="submit">Upload Photo</button>
-    </form>
-{% endif %}
+                {% if profile_pic %}
+                    <img src="{{ url_for('static', filename=profile_pic) }}" alt="Profile Picture">
+                {% else %}
+                    <img src="{{ url_for('static', filename='uploads/default-profile.jpg') }}" alt="Profile Picture">
+                {% endif %}
+                <form action="/upload-photo" method="POST" enctype="multipart/form-data" style="margin-top: 10px;">
+                    <label class="edit-btn">
+                        Change Photo
+                        <input type="file" name="profile_pic" onchange="this.form.submit()" style="display:none;">
+                    </label>
+                </form>
+            </div>
 
             </div>
             <div class="profile-details">
@@ -103,17 +96,13 @@
             <button type="submit">Change password</button>
         </form>
     </div>
-</div>
-        </div>
 
-        <div class="user-posts">
-            <h2>Your posts</h2>
-            <ul>
-                <li><a href="/post/1">Post Title 1</a></li>
-                <li><a href="/post/2">Post Title 2</a></li>
-                <li><a href="/post/3">Post Title 3</a></li>
-                <!-- Add more posts dynamically -->
-            </ul>
+    <div style="margin-top: 10px;">
+        <form action="{{ url_for('logout') }}" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</div>
         </div>
     </div>
 

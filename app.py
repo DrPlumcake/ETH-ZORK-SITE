@@ -166,7 +166,7 @@ def upload_file():
 def detail():
     return render_template('detail.html')
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user', None)
     return redirect('/')
