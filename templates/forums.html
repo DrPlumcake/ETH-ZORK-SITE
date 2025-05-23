@@ -19,8 +19,8 @@
         </span>
         <ul class="nav-list">
             <li class="nav-item"><a href="/">Forums</a></li>
-            <li class="nav-item"><a href="/profile">Profile</a></li>
             <li class="nav-item"><a href="/detail">Detail</a></li>
+            <li class="nav-item"><a href="/profile">Profile</a></li>
             {% if current_user.is_authenticated %}
                 <!-- Utente loggato: mostra logout -->
                 <li class="nav-item"><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -52,195 +52,203 @@
         </div>
     </header>
     <div class="container">
-        <div class="subforum">
-            <div class="subforum-title">
-                <h1>General Information</h1>
+        <!--Topic Section-->
+        <div class="topic-container">
+            <!--Original thread-->
+            <div class="head">
+                <div class="authors">Author</div>
+                <div class="content">Topic: Zork Game is Found (Read 1325 Times)</div>
+                <p>📅 Started by user 8bitPlayer — 3 weeks ago</p>
             </div>
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
+
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">8bitPlayer</a></div>
+                    <div>Role</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>45</u></div>
+                    <div>Points: <u>4586</u></div>
                 </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
-                </div>
-            </div>
-        </div>
-        <!--More-->
-        
-        <div class="subforum">
-            <div class="subforum-title">
-                <h1>General Information</h1>
-            </div>
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
-                </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
+                <div class="content">
+                    Hey folks — not sure if anyone here remembers this title but...
+                    <br>I found a floppy disk at a local flea market labeled <strong>"ZORK: Lost Memories"</strong>.
+                    <br><br>Popped it into my old Computer for laughs and… okay, this is not the Zork I remember.
+                    <br>It starts normal enough: you’re an adventurer in front of a huge black tower. But then some of
+                    the descriptions gets... off. Like, the writing feels almost creepy?
+                    <br>Anyway, I googled it and stumbled on this wiki. Anyone know more?
+                    <br><br>
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXpvM2c3dnBhZWN4azBmczczemt0dTQ1Zng5NmQ4ZHJ4YXlwZnFpdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/hv53DaYcXWe3nRbR1A/giphy.gif" alt="GIF" width="200">
+                    <br><br>
+                    <a href="/thread-1">Vai a Thread 1</a>
+
+
                 </div>
             </div>
-            <hr class="subforum-divider">
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">Theo404</a></div>
+                    <div>Role</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>45</u></div>
+                    <div>Points: <u>4586</u></div>
                 </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
-                </div>
-            </div>
-            <hr class="subforum-divider">
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
-                </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
-                </div>
-            </div>
-            <hr class="subforum-divider">
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
-                </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
-                </div>
-            </div>
-            <hr class="subforum-divider">
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
-                </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
-                </div>
-            </div>
-        </div>
-        
-        <div class="subforum">
-            <div class="subforum-title">
-                <h1>General Information</h1>
-            </div>
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
-                </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
-                </div>
-            </div>
-            <hr class="subforum-divider">
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
-                </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
-                </div>
-            </div>
-            <hr class="subforum-divider">
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
-                </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
-                </div>
-            </div>
-            <hr class="subforum-divider">
-            <div class="subforum-row">
-                <div class="subforum-icon subforum-column center">
-                    <i class="fa fa-car center"></i>
-                </div>
-                <div class="subforum-description subforum-column">
-                    <h4><a href="#">Description Title</a></h4>
-                    <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
-                </div>
-                <div class="subforum-stats subforum-column center">
-                    <span>24 Posts | 12 Topics</span>
-                </div>
-                <div class="subforum-info subforum-column">
-                    <b><a href="">Last post</a></b> by <a href="">JustAUser</a> 
-                    <br>on <small>12 Dec 2020</small>
+                <div class="content">
+                    Okay, this is getting weird.
+                    <br>The starting intro of the game says:
+                    <br><br>“I gave him no choice. I told him it was duty of our family. But if i had been a kinder, gentler father, perhaps none of this would have happened”
+                    <br><br>That exact phrase?
+                    <br>It’s a quote from an actual 2009 interview with Everett Haire, the CEO of BrightGlass.
+                    <br><br>Coincidence?
+                    <br>I’m starting to think this game isn’t inspired by Towerfall.
+                    <br>It is Towerfall… just—rebuilt. And laced with references.
+                    <br><br><br>
+                    <div class="comment">
+                    <a href="/thread-2">Vai a Thread 2</a>
+                    </div>
                 </div>
             </div>
 
-           
         </div>
-        <!---->
+
+
+        <div class="topic-container">
+            <!--Original thread-->
+            <div class="head">
+                <div class="authors">Author</div>
+                <div class="content">Topic: Secrets in the Game (Read 1325 Times)</div>
+                <p>📅 Started by user 8bitPlayer — 2 weeks ago</p>
+            </div>
+
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">8bitPlayer</a></div>
+                    <div>Post #1</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>45</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    Okay…
+                    <br>So, I was messing around with potion combinations and successfully crafted the corrosive potion. I used that on the rusted iron door,
+                    <br>the one in the first floor, that didn’t respond to anything else… and it worked. There’s a hidden room back there.
+                    <br><br>Inside? Just a single wooden box and a parchment. The parchment reads about the tower and its meaning.
+                    <br>I'm not joking that gave me real chills. But then it justs says this:
+                    <br><br>“You who are reading this, please help me. Free me from him.”
+                    <br><br>Wtf?
+                    <br>I don’t know what it does. Can’t use it yet.
+                    <br>Also — later, in the Lab, i finally created the Change-Shape potion. Where should i use it?
+                    <br><📸 Screenshot: Text log of secret room entry + parchment>
+                    <br><br><br>
+                    <div class="comment">
+                    <a href="/thread-3">Vai a Thread 3</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="topic-container">
+            <!--Original thread-->
+            <div class="head">
+                <div class="authors">Author</div>
+                <div class="content">Topic: Second Secret (Read 1325 Times)</div>
+                <p>📅 Started by user 8bitPlayer — 1 week ago</p>
+            </div>
+
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">8bitPlayer</a></div>
+                    <div>Post #1</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>45</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    Ok i'm returned to the library and i found the Dark Magic Tome. That will be definitely useful against the Dark Mage.
+                    <br><br>I will be searching the library a little longer, just in case i missed smth.
+                    <br><br><br>
+                    
+                    <div class="comment">
+                    <a href="/thread-4">Vai a Thread 4</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="topic-container">
+            <!--Original thread-->
+            <div class="head">
+                <div class="authors">Author</div>
+                <div class="content">Topic: 8bitPlayer (Read 1325 Times)</div>
+                <p>📅 Started by user Theo404 — 3 days ago</p>
+            </div>
+
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">Theo404</a></div>
+                    <div>Post #1</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>45</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    When I saw that 8bitPlayer had not updated us on its progress, I feared the worst, so I increased the pace of my research.
+                    <br>This morning the body of Luca Vernier (a.k.a. 8bitPlayer) was found at his apartment. The cause of death is probably overdose,
+                    <br>even if Luca never used any particular drugs in his entire life.
+                    <br>The police is now aware that this is not anymore a suicide case, so this site and this machine is requisitioned as possible proof source for the investigations.
+                    <br><br>I'm a police detective, and we are very near to find the culprit responsible of the BrightGlass Studio case.
+                    <br>We will inspect the server running this wiki for further clues inside the game or the machineitself.
+                    <br><br>This will be the last post of the wiki.
+
+                    <br><br><br>
+                    <div class="comment">
+                    <a href="/thread-5">Vai a Thread 5</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">ZAdmin</a></div>
+                    <div>Reply #1</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    I'm really sorry for him. He will not be forgotten, as for the other victims.
+                    <br><br>The culprit will pay the price for his crimes.
+                    <br><br><br>
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+        
+
+
+
+        </div>
+
+        
+
     </div>
+        
+       
 
     <!-- Forum Info -->
     <div class="forum-info">

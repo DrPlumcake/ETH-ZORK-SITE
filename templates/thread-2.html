@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - My Forum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+    <nav class="navigation" id="navigation">
+        <span class="close-icon" id="close-icon" onclick="showIconBar()" style="display: none;">
+            <i class="fa fa-close"></i>
+        </span>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="/">Forums</a></li>
+            <li class="nav-item"><a href="/profile">Profile</a></li>
+            <li class="nav-item"><a href="/detail">Detail</a></li>
+            <li class="nav-item"><a href="/login">Login</a></li>
+        </ul>
+    </nav>
+    <a class="bar-icon" id="iconBar" onclick="hideIconBar()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="brand">My Forum</div>
+</div>
+
+    </header>
+
+    
+
+       <!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">8bitPlayer</a></div>
+                    <div>Reply #1</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    Okay I just got chills.
+                    <br>I now remember the intro. Thought it was just poetic writing.
+                    <br>What the hell kind of game IS this?
+                    <br>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExanJoYms4cnU2ZjIyZGw0b3U3MHdlZXk0b3pleXQwMnh2Nmk4MTJwbyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3ELtfmA4Apkju/giphy.gif" alt="GIF" width="200">
+                    <br><br>
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+
+         <!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">Gl1tchL0rd</a></div>
+                    <div>Reply #2</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    Y’all are seriously reading into this way too much.
+                    <br><br>Games re-use quotes all the time. Maybe the dev was just a fan of BrightGlass, or maybe it's a troll.
+                    <br><br>There’s no way anyone would rebuild a whole game just to reference a dead studio. Right?
+                    <br>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamU1dmt3djRmbXRiMGNkc3N1NjI2cHk4ODlmODBjajB0aXNtNXczeSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/AEdGTkcDUrYlOr6MRF/giphy.gif" alt="GIF" width="200">
+                    <br><br>
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+
+         <!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">ZAdmin</a></div>
+                    <div>Reply #3</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    You’d be surprised what people do with grief. Or guilt.
+                    <br><br><br>
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+
+         <!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">Theo404</a></div>
+                    <div>Reply #4</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    The head of BrightGlass couldn't bear the pressure any longer and was the first to go, taking a
+                    <br>drastic step. One by one, the other developers either vanished under unclear circumstances or
+                    <br>were later found lifeless in their apartments. Each died from an overdose, spaced out over time.
+                    <br><br>The police ruled them suicides.
+                    <br>But what if that wasn’t the whole story?
+                    <br><br>What if someone had led them to that breaking point?
+                    <br><br><br>
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+
+
+<!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">Gl1tchL0rd</a></div>
+                    <div>Reply #5</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    You guys need to chill. This is a creepypasta at best.
+                    <br><br>Besides, even if there’s overlap — it doesn’t mean anything.
+                    <br>People project all the time. Doesn’t make it true.
+                    <br><br>It’s fiction. Period.
+                    <br><br><br>
+
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+ <!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">ZAdmin</a></div>
+                    <div>Reply #6</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                   Fiction is a mirror.
+                    <br><br>Sometimes you have to look into it long enough to see who’s really standing behind you.
+                    <br>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzRmNDNsNWl4YWQ3dWkxaTM3eHU2bDBnM2c3bXB0cHFlbG9lamtndiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MY7SyM8fmSrZjx1gPr/giphy.gif" alt="GIF" width="200">
+                    <br><br>
+
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+
+         <!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">Theo404</a></div>
+                    <div>Reply #7</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    Starting to feel like we’re playing a ghost story.
+                    <br><br><br>
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+
+
+
+<!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">8bitPlayer</a></div>
+                    <div>Reply #8</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    One thing I noticed too:
+                    <br><br>In the alchemy room, there’s a note near the potion table that says:
+                    <br><bn>"Tricks and traps are the only way for wizards to be strong and powerful. Without them, they are just weak.
+                    <br>This is a hard truth, and the first lesson every wizard learns. This power is dangerous, for without wisdom it can make a wizard a deceiver."
+                    <br><br>It's not a bit strange to find a note like that? Who could have written that? The Mage?
+                    <br>What if the Mage was someone in the real world?
+                    <br><br><br>
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+
+         <!--Another Comment With replies-->
+        <div class="comments-container">
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">Gl1tchL0rd</a></div>
+                    <div>Reply #9</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>455</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    You’re seeing patterns where there aren’t any.
+                    <br><br>Games like this mess with your head, especially retro ones.
+                    <br>I’ve seen it before.
+                    <br><br><br>
+                    <div class="comment">
+                        <button onclick="showReply()">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Reply Area-->
+        <div class="comment-area hide" id="reply-area">
+            <textarea name="reply" id="" placeholder="reply here ... "></textarea>
+            <input type="submit" value="submit">
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer style="margin-top: 50px;">
+        <span>&copy; Selmi Abderrahim | All Rights Reserved</span>
+    </footer>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+
+
+</body>
+</html>

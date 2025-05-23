@@ -60,31 +60,6 @@ def login():
 
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        # Controllo se esiste già lo username
-        existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
-            flash('Username già in uso.')
-            return redirect(url_for('register'))
-        
-        # Creo il nuovo utente
-        new_user = User(username=username)
-        new_user.set_password(password)  # qui viene fatto l'hash e assegnato a new_user.password
-                
-        # Aggiungo alla sessione e committo
-        db.session.add(new_user)
-        db.session.commit()
-
-        flash('Registrazione avvenuta con successo!')
-        return redirect(url_for('login'))
-
-    return render_template('register.html')
-
 
 
 
@@ -173,6 +148,28 @@ def form_update_user():
     return render_template('formUpdateUser.html', user=user)
 
 
+@app.route('/thread-1')
+def thread_1():
+    return render_template('thread-1.html')
+
+@app.route('/thread-2')
+def thread_2():
+    return render_template('thread-2.html')
+
+@app.route('/thread-3')
+def thread_3():
+    return render_template('thread-3.html')
+
+@app.route('/thread-4')
+def thread_4():
+    return render_template('thread-4.html')
+
+@app.route('/thread-5')
+def thread_5():
+    return render_template('thread-5.html')
+
+
+
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -220,3 +217,7 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Crea le tabelle se non esistono
     app.run(host="127.0.0.1", port=5000, debug=True)
+
+
+
+
