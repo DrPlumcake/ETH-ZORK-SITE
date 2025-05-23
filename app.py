@@ -176,8 +176,11 @@ def update_profile():
     user = User.query.get(session['user']['id'])
 
     if request.method == 'POST':
-        user.username = request.form['username']
-        user.password = request.form['password'] 
+        user.username = request.form.get('new_username', user.username)
+        new_password = request.form.get('new_password')
+
+        if new_password:
+            user.password = new_password
         template = Template(user.username)
         rendered = template.render()
 
@@ -194,7 +197,7 @@ def update_profile():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Crea le tabelle se non esistono
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="127.0.0.1", debug=True)
 
 
 
