@@ -1,6 +1,6 @@
 from flask import flash, Flask, render_template, request, redirect, session, render_template_string, url_for, render_template
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import current_user, LoginManager, login_required, login_user, UserMixin
+from flask_login import current_user, LoginManager, login_required, login_user
 from sqlalchemy import text
 from werkzeug.utils import secure_filename
 import os
@@ -18,19 +18,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # MODELLO USER
-class User(db.Model, UserMixin):
+class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(128), unique=True, nullable=False)
     password = db.Column(db.String(256), nullable=False)
+    email = db.Column(db.String(128), unique=True, nullable=True)
     profile_pic = db.Column(db.String(200))
-    
-    def set_password(self, password):
-        self.password = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
-    
 
 @app.route('/')
 def index():
@@ -40,27 +34,25 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user_input = request.form['username']  # o 'email', come preferisci
+        user = request.form['username']
         pwd = request.form['password']
 
-        user = User.query.filter_by(username=user_input).first()
+        # Query vulnerabile a SQL Injection
+        query = text(f"SELECT * FROM users WHERE username = '{user}' AND password = '{pwd}'")
+        existing_user = db.session.execute(query).fetchone()
 
-        if user and check_password_hash(user.password, pwd):
-            login_user(user)
-            session['user_id'] = user.id
-            flash('Accesso effettuato con successo!')
-            return redirect(url_for('profile'))
+        #existing_user = User.query.filter_by(username=user, password=pwd).first()
+        if existing_user:
+            session['user'] = {
+                'id': existing_user.id,
+                'username': existing_user.username,
+                'email': existing_user.email,
+                'profile_pic': existing_user.profile_pic
+            }
+            return redirect('/profile')
         else:
-            flash('Username o password errati')
-            return redirect(url_for('login'))
-
+            return "Login fallito"
     return render_template('login.html')
-
-
-
-
-
-
 
 
 @app.route('/upload-photo', methods=['POST'])
@@ -101,51 +93,42 @@ def upload_photo():
 
 
 @app.route('/profile')
-@login_required
 def profile():
-    user = current_user
+    if 'user' not in session:
+        return redirect('/login')
+    user = User.query.get(session['user']['id'])
+    rendered_username = render_template_string(user.username)
 
     return render_template('profile.html', user={
         'id': user.id,
-        'username': user.username,
+        'username': rendered_username,
         'email': getattr(user, 'email', ''),
         'profile_pic': user.profile_pic
     })
 
 
-
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-
-@app.route('/formUpdateUser', methods=['GET', 'POST'])
-@login_required
-def form_update_user():
-    user = current_user
-
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form.get('email')
-        password = request.form.get('password')  # può essere vuoto
-
-        user.username = username
-        if email:
-            user.email = email
-
-        if password:
-            user.set_password(password)  # usa il metodo corretto
-
-        db.session.commit()
-        flash('Profilo aggiornato con successo.')
-        return redirect(url_for('profile'))
-
-    return render_template('formUpdateUser.html', user=user)
+# @app.route('/formUpdateUser', methods=['GET', 'POST'])
+# @login_required
+# def form_update_user():
+#     user = current_user
+#
+#     if request.method == 'POST':
+#         username = request.form['username']
+#         email = request.form.get('email')
+#         password = request.form.get('password')  # può essere vuoto
+#
+#         user.username = username
+#         if email:
+#             user.email = email
+#
+#         if password:
+#             user.set_password(password)  # usa il metodo corretto
+#
+#         db.session.commit()
+#         flash('Profilo aggiornato con successo.')
+#         return redirect(url_for('profile'))
+#
+#     return render_template('formUpdateUser.html', user=user)
 
 
 @app.route('/thread-1')
@@ -191,25 +174,21 @@ def logout():
     return redirect('/')
 
 @app.route('/update-profile', methods=['GET', 'POST'])
-@login_required
 def update_profile():
-    if request.method == 'POST':
-        user = User.query.get(current_user.id)
-        user.username = request.form['username']
-        
-        password = request.form['password']
-        if password:
-            user.set_password(password)  # ✅ HASH DELLA PASSWORD
+    if 'user' not in session:
+        return redirect('/login')
 
-        email = request.form.get('email')
-        if email:
-            user.email = email
+    if request.method == 'POST':
+        user = User.query.get(session['user']['id'])
+        user.username = request.form['username']
+        user.password = request.form['password']  # Idealmente hashata
+        template = Template(user.username)
+        rendered = template.render()
 
         db.session.commit()
-        flash('Profilo aggiornato con successo.')
+        session['user']['username'] = rendered
         return redirect('/profile')
-
-    return render_template('formUpdateUser.html', user=current_user)
+    return render_template('profile.html')
 
 
 
