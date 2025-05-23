@@ -149,9 +149,6 @@ def thread_4():
 def thread_5():
     return render_template('thread-5.html')
 
-
-
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
     file = request.files['file']
@@ -175,9 +172,10 @@ def logout():
 def update_profile():
     if 'user' not in session:
         return redirect('/login')
+    
+    user = User.query.get(session['user']['id'])
 
     if request.method == 'POST':
-        user = User.query.get(session['user']['id'])
         user.username = request.form['username']
         user.password = request.form['password'] 
         template = Template(user.username)
@@ -186,9 +184,12 @@ def update_profile():
         db.session.commit()
         session['user']['username'] = rendered
         return redirect('/profile')
-    return render_template('profile.html')
-
-
+    return render_template('profile.html', user={
+        'id': user.id,
+        'username': user.username,
+        'email': user.email,
+        'profile_pic': user.profile_pic
+    })
 
 if __name__ == '__main__':
     with app.app_context():
